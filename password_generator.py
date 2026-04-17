@@ -3,7 +3,7 @@ import string
 # import random
 
 def generate_password(
-    length: int = 19,
+    length: int = 8,
     use_upper: bool = True,
     use_lower: bool = True,
     use_digits: bool = True,
@@ -55,8 +55,6 @@ def generate_password(
         return str(stringa)
 
 
-
-
     #per ogni carattere pushare il risultato di una delle funzioni, in modo da avere una password che contenga tutti i tipi di caratteri, e che sia lunga quanto la lenght data come parametro.
     array_passw = []
     funzioni = [gen_upper, gen_lower, gen_digits, gen_symbols]
@@ -75,16 +73,12 @@ def generate_password(
     while len(array_passw) < length:
         array_passw.append(secrets.choice(funzioni)())
 
-    # return print(gen_upper(1) + gen_lower(1) + gen_digits(1) + gen_symbols(1))
-    # print(secrets.token_urlsafe(length)) # torna una stringa casuale di lunghezza lenght, composta da lettere, numeri e simboli.
-    # print(secrets.choice(string.ascii_letters + string.digits))
-
-
-
-    if (gen_upper_check == False and use_upper == True) or (gen_lower_check == False and use_lower == True) or (gen_digits_check == False and use_digits == True) or (gen_symbols_check == False and use_symbols == True):
-        raise ValueError("la password non è stata generata correttamente... riprova.")
-        
-
+   
+    if ((gen_upper_check == False and use_upper == True) or (gen_lower_check == False and use_lower == True) or (gen_digits_check == False and use_digits == True) or (gen_symbols_check == False and use_symbols == True)):
+        if length > len(funzioni):
+            
+            generate_password()
+            # raise ValueError("la password non è stata generata correttamente... riprova.")
 
     password = ''.join(array_passw)
     return print (password)
@@ -92,5 +86,14 @@ def generate_password(
 
 print("Generating password...")
 generate_password()
+
+
+
+
+
+
+# return print(gen_upper(1) + gen_lower(1) + gen_digits(1) + gen_symbols(1))
+# print(secrets.token_urlsafe(length)) # torna una stringa casuale di lunghezza lenght, composta da lettere, numeri e simboli.
+# print(secrets.choice(string.ascii_letters + string.digits))
 
 
